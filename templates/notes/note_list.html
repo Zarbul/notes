@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for note in note_list %}
+        <div class="col-md-4 product-men">
+            <div class="product-shoe-info editContent text-center mt-lg-4">
+                <div class="item-info-product">
+                    <h4>
+                        <a href="{% url 'detail' pk=note.id %}" class="editContent">
+                            {{ note.name }}
+                        </a>
+                    </h4>
+                    <div class="item-info-product">
+                        <p>{{ note.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
