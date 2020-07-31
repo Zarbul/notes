@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="large-offset-5 large-3 columns">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    {{ form.errors }}
+                    {{ form.as_p }}
+                </div>
+                <div class="card-footer">
+                    <small>
+                        <a href="#">Регистрация</a> | <a href="#">Forgot password?</a>
+                    </small>
+                    <div class="columns">
+                        <input class="btn btn-outline-success col-sm-3" type="submit" value="Войти">
+                    </div>
+                    <small>
+                        <p class="text-muted">Или войдите с помощью социальных сетей: </p>
+                        <a href="#">
+                            <img
+                                src="https://vk.com/images/icons/favicons/fav_logo.ico" class="avatar-3"
+                                data-toggle="tooltip"
+                                title="Login via VKontakte">
+                        </a>{#{% url 'social:begin' 'vk-oauth2' %}#}
+                    </small>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
