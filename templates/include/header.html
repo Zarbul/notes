@@ -13,30 +13,34 @@
             <label for="drop" class="toggle">Menu</label>
             <input type="checkbox" id="drop">
             <ul class="menu mt-2">
-                <li class="active">
-                    <a href="{% url 'home' %}">Main Page</a>
-                </li>
-                <li>
-                    <!-- First Tier Drop Down -->
-                    <label for="drop-2" class="toggle">Category <span
-                            class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                    <a href="#">Category <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                    <input type="checkbox" id="drop-2">
-                    <ul>
-                        <li><a href="#">First</a></li>
-                        <li><a href="#">Second</a></li>
-                        <li><a href="#">Third</a></li>
-                    </ul>
-                </li>
-                <li>
-                    {% if user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'logout' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Выйти ({{ user.username }})</a>
-                        </li>
-                    {% else %}
-                        <li><a href="{% url 'login' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Войти</a></li>
-                        <li><a href="{% url 'register' %}" style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Регистрация</a></li>
-                    {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="active">
+                        <a href="{% url 'list' %}">All Notes</a>
+                    </li>
+                    <li>
+                        <!-- First Tier Drop Down -->
+                        <label for="drop-2" class="toggle">Category <span
+                                class="fa fa-angle-down" aria-hidden="true"></span> </label>
+                        <a href="#">Category <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                        <input type="checkbox" id="drop-2">
+                        <ul>
+                            {% for category in category_list %}
+                                <li><a href="{% url 'category' pk=category.id %}">{{category.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>
+
+                    <li>
+                        <a href="{% url 'logout' %}"
+                           style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Выйти
+                            ({{ user.username }})</a>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}"
+                           style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Войти</a>
+                    </li>
+                {% endif %}
                 </li>
             </ul>
         </nav>
