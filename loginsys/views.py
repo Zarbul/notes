@@ -12,16 +12,15 @@ class Logout(LogoutView):
     next_page = '/'
 
 
-
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            user = auth.authenticate(email=form.cleaned_data['email'],
+            user = auth.authenticate(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
                                      password=form.cleaned_data['password2'])
             auth.login(request, user)
-        return redirect('/')
+            return redirect('/')
     else:
         form = RegisterForm()
     return render(request, 'loginsys/register.html', {'form': form})
