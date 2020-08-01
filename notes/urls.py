@@ -17,7 +17,7 @@ from django.urls import path, include
 from .views import BaseView, NoteListView, NoteDetailView
 
 urlpatterns = [
-    path('', BaseView.as_view()),
-    path('note_list/', NoteListView.as_view(), name='home'),
+    path('', BaseView.as_view(), name='home'),
+    path('note_list/', NoteListView.as_view(), name='list'),
     path('note_detail/<int:pk>', NoteDetailView.as_view(), name='detail'),
 ]
